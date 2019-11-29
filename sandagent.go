@@ -11,23 +11,6 @@ import (
 
 var AgentPayClient PaymentAgent
 
-func init() {
-	//TODO 改为配置文件
-	AgentPayClient.Config = agent.Config{
-		Version:         "1.0",
-		MerId:           "S6887745",
-		PrivatePath:     "/Users/linwenxiang/Downloads/certs/server.key", //私钥文件
-		CertPath:        "/Users/linwenxiang/Downloads/certs/server.crt", //公钥文件
-		EncryptCertPath: "/Users/linwenxiang/Downloads/certs/sand.cer",   //导出的公钥文件
-		//ApiHost:         "https://caspay.sandpay.com.cn/agent-main/openapi",
-		ApiHost:         "https://cashier.sandpay.com.cn",
-		//ApiHost:   "http://61.129.71.103:8003/agent-main/openapi",
-		NotifyUrl: "https://www.baidu.com",
-		FrontUrl:  "https://www.baidu.com",
-	}
-	agent.LoadCertInfo(&AgentPayClient.Config)
-}
-
 type PaymentAgent struct {
 	Config agent.Config
 }

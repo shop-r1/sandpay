@@ -12,23 +12,6 @@ import (
 
 var Client SandPay
 
-func init() {
-	//TODO 改为配置文件
-	Client.Config = pay.Config{
-		Version:         "1.0",
-		MerId:           "S6887745",
-		PrivatePath:     "/Users/linwenxiang/Downloads/certs/server.key", //私钥文件
-		CertPath:        "/Users/linwenxiang/Downloads/certs/server.crt", //公钥文件
-		EncryptCertPath: "/Users/linwenxiang/Downloads/certs/sand.cer",   //导出的公钥文件
-		ApiHost:         "https://cashier.sandpay.com.cn",
-		NotifyUrl:       "https://www.baidu.com",
-		FrontUrl:        "https://www.baidu.com",
-		//ApiHost:   	 "http://61.129.71.103:8003",
-		//ApiHost:       "https://cashier.sandpay.com.cn/gateway/api",
-	}
-	pay.LoadCertInfo(&Client.Config)
-}
-
 type SandPay struct {
 	Config pay.Config
 }
@@ -77,7 +60,7 @@ func (sandPay *SandPay) OrderPayQrWx(params params.OrderPayParams) (resp respons
 	header.SetMethod(`sandpay.trade.precreate`).SetVersion(`1.0`).SetAccessType("1")
 	header.SetChannelType("07").SetMid(config.MerId).SetProductId("00000005").SetReqTime(timeString)
 	body := request.OrderPayBody{
-		PayTool: "0402",
+		PayTool:     "0402",
 		OrderCode:   params.OrderNo,
 		TotalAmount: params.GetTotalAmountToString(),
 		Subject:     params.Subject,
@@ -112,7 +95,7 @@ func (sandPay *SandPay) OrderPayQrAlipay(params params.OrderPayParams) (resp res
 	header.SetMethod(`sandpay.trade.precreate`).SetVersion(`1.0`).SetAccessType("1")
 	header.SetChannelType("07").SetMid(config.MerId).SetProductId("00000006").SetReqTime(timeString)
 	body := request.OrderPayBody{
-		PayTool: "0401",
+		PayTool:     "0401",
 		OrderCode:   params.OrderNo,
 		TotalAmount: params.GetTotalAmountToString(),
 		Subject:     params.Subject,

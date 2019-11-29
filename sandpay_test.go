@@ -31,8 +31,8 @@ func TestSandPay_OrderPay(t *testing.T) {
 					ClientIp:    "103.30.99.197",
 					PayMode:     params.PayModWeiXinMp,
 					PayExtra: params.PayExtraWeiChat{
-						SubAppId: "xxxx",
-						OpenId: "xxxx",
+						SubAppId: "xxx",
+						OpenId:   "xxx",
 					},
 				},
 			},
@@ -76,8 +76,8 @@ func TestSandPay_OrderPayQrAlipay(t *testing.T) {
 					ClientIp:    "103.30.99.197",
 					PayMode:     params.PayModWeiXinMp,
 					PayExtra: params.PayExtraWeiChat{
-						SubAppId: "wx29c4121dda03c5c2",
-						OpenId: "oU48j5vOQjDBwOfWzkoSfXNSKZUY",
+						SubAppId: "xxx",
+						OpenId:   "xxx",
 					},
 				},
 			},
@@ -121,8 +121,8 @@ func TestSandPay_OrderPayQrWx(t *testing.T) {
 					ClientIp:    "103.30.99.197",
 					PayMode:     params.PayModWeiXinMp,
 					PayExtra: params.PayExtraWeiChat{
-						SubAppId: "wx29c4121dda03c5c2",
-						OpenId: "oU48j5vOQjDBwOfWzkoSfXNSKZUY",
+						SubAppId: "xxx",
+						OpenId:   "xxx",
 					},
 				},
 			},
@@ -166,8 +166,8 @@ func TestSandPay_OrderPayWx(t *testing.T) {
 					ClientIp:    "103.30.99.197",
 					PayMode:     params.PayModWeiXinMp,
 					PayExtra: params.PayExtraWeiChat{
-						SubAppId: "wx29c4121dda03c5c2",
-						OpenId: "oU48j5vOQjDBwOfWzkoSfXNSKZUY",
+						SubAppId: "xxx",
+						OpenId:   "xxx",
 					},
 				},
 			},

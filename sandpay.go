@@ -24,7 +24,7 @@ func (sandPay *SandPay) OrderPayWx(params params.OrderPayParams) (resp response.
 
 	header := request.Header{}
 	header.SetMethod(`sandpay.trade.pay`).SetVersion(`1.0`).SetAccessType("1")
-	header.SetChannelType("07").SetMid(config.MerId).SetProductId("00002020").SetReqTime(timeString)
+	header.SetChannelType("07").SetMid(config.MerId).SetProductId("00000005").SetReqTime(timeString)
 	body := request.OrderPayBody{
 		//PayTool: "0402",
 		OrderCode:   params.OrderNo,
@@ -52,16 +52,16 @@ func (sandPay *SandPay) OrderPayWx(params params.OrderPayParams) (resp response.
 	return resp, err
 }
 
-// pc微信统一下单接口
-func (sandPay *SandPay) OrderPayQrWx(params params.OrderPayParams) (resp response.OrderPayResponse, err error) {
+// 聚合统一下单接口
+func (sandPay *SandPay) OrderPayQr(params params.OrderPayParams) (resp response.OrderPayResponse, err error) {
 	config := sandPay.Config
 	timeString := time.Now().Format("20060102150405")
 
 	header := request.Header{}
 	header.SetMethod(`sandpay.trade.precreate`).SetVersion(`1.0`).SetAccessType("1")
-	header.SetChannelType("07").SetMid(config.MerId).SetProductId("00000005").SetReqTime(timeString)
+	header.SetChannelType("07").SetMid(config.MerId).SetProductId("00000012").SetReqTime(timeString)
 	body := request.OrderPayBody{
-		PayTool:     "0402",
+		PayTool:     "0401",
 		OrderCode:   params.OrderNo,
 		TotalAmount: params.GetTotalAmountToString(),
 		Subject:     params.Subject,

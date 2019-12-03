@@ -7,7 +7,6 @@ import (
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
-	"gopkg.in/ffmt.v1"
 	"io/ioutil"
 	"log"
 	"net/url"
@@ -55,14 +54,12 @@ type Config struct {
 }
 
 func LoadCertInfo(info *Config) (err error) {
-	fmt.Println("LoadCertInfo")
 	certData = &Cert{}
 	certData.EncryptCert, err = LoadPublicKey(info.EncryptCertPath)
 	if err != nil {
 		err = fmt.Errorf("encryptCert ERR:%v", err)
 		return
 	}
-	fmt.Println("LoadCertInfo1")
 	certData.EncryptId = fmt.Sprintf("%v", certData.EncryptCert.SerialNumber)
 	certData.Public = certData.EncryptCert.PublicKey.(*rsa.PublicKey)
 	//log.Println("	certData.Public", certData.Public)
@@ -200,7 +197,6 @@ func LoadPublicKey(path string) (cert *x509.Certificate, err error) {
 
 // 返回数据验签
 func PublicSha1Verify(vals url.Values) (res interface{}, err error) {
-	ffmt.P(vals)
 	var signature string
 	var str string
 	length := len(vals) - 1
@@ -238,7 +234,6 @@ func PublicSha1Verify(vals url.Values) (res interface{}, err error) {
 		//log.Println("PublicSha1Verify Error from signing: %s ", err)
 		//return "", err
 	}
-	ffmt.P(kvs)
 	return kvs, nil
 }
 

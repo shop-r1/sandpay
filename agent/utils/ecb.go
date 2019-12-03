@@ -13,7 +13,10 @@ func Base64URLDecode(data string) ([]byte, error) {
 	var missing = (4 - len(data)%4) % 4
 	data += strings.Repeat("=", missing)
 	res, err := base64.URLEncoding.DecodeString(data)
-	fmt.Println("  decodebase64urlsafe is :", string(res), err)
+	if err != nil {
+		fmt.Println("  decodebase64urlsafe is :", string(res), err)
+		return nil, err
+	}
 	return base64.URLEncoding.DecodeString(data)
 }
 

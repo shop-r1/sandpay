@@ -1,6 +1,7 @@
 package sandpay
 
 import (
+	"fmt"
 	"github.com/shop-r1/sandpay/pay"
 	"github.com/shop-r1/sandpay/pay/params"
 	"github.com/shop-r1/sandpay/pay/request"
@@ -75,9 +76,11 @@ func (sandPay *SandPay) OrderPayQr(params params.OrderPayParams) (resp response.
 	}
 
 	signDataJsonString := pay.GenerateSignString(body, header)
+	fmt.Println(signDataJsonString)
 	sign, _ := pay.PrivateSha1SignData(signDataJsonString)
 	postData := pay.GeneratePostData(signDataJsonString, sign)
 
+	fmt.Println(postData)
 	data, err := pay.PayPost(config.ApiHost+"/qr/api/order/create", postData)
 	if err != nil {
 		return

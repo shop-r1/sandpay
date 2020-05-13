@@ -89,6 +89,43 @@ func (sandPay *SandPay) OrderPayQr(params params.OrderPayParams) (resp response.
 	return resp, err
 }
 
+// 聚合统一下单接口
+func (sandPay *SandPay) OrderPayH5(params params.OrderPayParams) (resp response.OrderPayResponse, err error) {
+	config := sandPay.Config
+	timeString := time.Now().Format("20060102150405")
+
+	header := request.Header{}
+	header.SetMethod(`sandpay.trade.precreate`).SetVersion(`1.0`).SetAccessType("1")
+	header.SetChannelType("07").SetMid(config.MerId).SetProductId("00002000").SetReqTime(timeString)
+	body := request.OrderPayBody{
+		PayTool:     "0401",
+		OrderCode:   params.OrderNo,
+		TotalAmount: params.GetTotalAmountToString(),
+		Subject:     params.Subject,
+		Body:        params.Body,
+		TxnTimeOut:  params.TxnTimeOut,
+		PayMode:     params.PayMode,
+		PayExtra:    params.PayExtra.ToJson(),
+		ClientIp:    params.ClientIp,
+		NotifyUrl:   sandPay.Config.NotifyUrl,
+		FrontUrl:    sandPay.Config.FrontUrl,
+		Extends:     params.Extends,
+	}
+
+	signDataJsonString := pay.GenerateSignString(body, header)
+	fmt.Println(signDataJsonString)
+	sign, _ := pay.PrivateSha1SignData(signDataJsonString)
+	postData := pay.GeneratePostData(signDataJsonString, sign)
+
+	fmt.Println(postData)
+	data, err := pay.PayPost(config.ApiHost+"/qr/api/order/create", postData)
+	if err != nil {
+		return
+	}
+	resp.SetData(data.Data)
+	return resp, err
+}
+
 // 支付宝统一下单接口
 func (sandPay *SandPay) OrderPayQrAlipay(params params.OrderPayParams) (resp response.OrderPayResponse, err error) {
 	config := sandPay.Config

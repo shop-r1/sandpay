@@ -134,7 +134,7 @@ func TestSandPay_OrderPayQrWx(t *testing.T) {
 			sandPay := &SandPay{
 				Config: Client.Config,
 			}
-			gotResp, err := sandPay.OrderPayQrWx(tt.args.params)
+			gotResp, err := sandPay.OrderPayQr(tt.args.params)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("SandPay.OrderPay() error = %v, wantErr %v", err, tt.wantErr)
 				return

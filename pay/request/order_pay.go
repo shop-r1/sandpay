@@ -12,12 +12,14 @@ type OrderPayBody struct {
 	//5. 订单超时时间
 	TxnTimeOut string `json:"txnTimeOut"`
 	//支付模式
-	PayMode string `json:"payMode"`
+	PayMode string `json:"payMode,omitempty"`
+	//支付方式列表
+	PayModeList []string `json:"pay_mode_list,omitempty"`
 	//	7. 支付扩展域  ANS0.1024 C 具体格式根据 payMode 确定,
 	//PayExtra PayExtra `json:"payExtra"`
-	PayExtra string `json:"payExtra"`
+	PayExtra string `json:"payExtra,omitempty"`
 	//	8. 客户端 IP
-	ClientIp string `json:"clientIp"`
+	ClientIp string `json:"clientIp,omitempty"`
 	//9. 异步通知地址 notifyUrl ANS0.256 M \
 	NotifyUrl string `json:"notifyUrl"`
 	//10. 前台通知地址
@@ -41,5 +43,5 @@ type OrderPayBody struct {
 	//19. 扩展域
 	Extends string `json:"extends"`
 	//支付工具
-	PayTool string `json:"payTool"`
+	PayTool string `json:"payTool,omitempty"`
 }

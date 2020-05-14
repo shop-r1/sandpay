@@ -98,18 +98,18 @@ func (sandPay *SandPay) OrderPayH5(params params.OrderPayParams) (resp response.
 	header.SetMethod(`sandpay.trade.orderCreate`).SetVersion(`1.0`).SetAccessType("1")
 	header.SetChannelType("07").SetMid(config.MerId).SetProductId("00002000").SetReqTime(timeString)
 	body := request.OrderPayBody{
-		PayTool:     "0401",
+		//PayTool:     "0401",
 		OrderCode:   params.OrderNo,
 		TotalAmount: params.GetTotalAmountToString(),
 		Subject:     params.Subject,
 		Body:        params.Body,
 		TxnTimeOut:  params.TxnTimeOut,
-		PayMode:     params.PayMode,
-		PayExtra:    params.PayExtra.ToJson(),
-		ClientIp:    params.ClientIp,
-		NotifyUrl:   sandPay.Config.NotifyUrl,
-		FrontUrl:    sandPay.Config.FrontUrl,
-		Extends:     params.Extends,
+		//PayMode:     params.PayMode,
+		//PayExtra:    params.PayExtra.ToJson(),
+		//ClientIp:    params.ClientIp,
+		NotifyUrl: sandPay.Config.NotifyUrl,
+		FrontUrl:  sandPay.Config.FrontUrl,
+		Extends:   params.Extends,
 	}
 
 	signDataJsonString := pay.GenerateSignString(body, header)

@@ -118,7 +118,7 @@ func (sandPay *SandPay) OrderPayH5(params params.OrderPayParams) (resp response.
 	postData := pay.GeneratePostData(signDataJsonString, sign)
 
 	fmt.Println(postData)
-	data, err := pay.PayPost(config.ApiHost+"/gw/web/order/create", postData)
+	data, err := pay.PayPostRedirect(config.ApiHost+"/gw/web/order/create", postData)
 	if err != nil {
 		return
 	}

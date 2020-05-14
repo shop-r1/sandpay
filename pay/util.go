@@ -148,6 +148,48 @@ func PayPost(requrl string, request map[string]string) (response response.Respon
 	return response, err
 }
 
+// 发送post请求
+func PayPostRedirect(requrl string, request map[string]string) (response response.Response, err error) {
+	http := TimeoutClient()
+	resp, err := http.Post(requrl, "application/x-www-form-urlencoded", strings.NewReader(HttpBuildQuery(request)))
+
+	if err != nil {
+		return response, err
+	}
+	if resp.StatusCode != 200 {
+		return response, fmt.Errorf("http request response StatusCode:%v", resp.StatusCode)
+	}
+	defer resp.Body.Close()
+	data, err := ioutil.ReadAll(resp.Body)
+	fmt.Println(string(data))
+	dataString, _ := url.QueryUnescape(string(data[:]))
+
+	if err != nil {
+		return response, err
+	}
+	var fields []string
+	fields = strings.Split(dataString, "&")
+
+	vals := url.Values{}
+	for _, field := range fields {
+		f := strings.SplitN(field, "=", 2)
+		if len(f) >= 2 {
+			key, val := f[0], f[1]
+			vals.Set(key, val)
+		}
+	}
+	result, err := PublicSha1Verify(vals)
+	if err != nil {
+		return response, err
+	}
+	mapInfo := result.(map[string]string)
+	for key, value := range mapInfo {
+		//log.Println("mapinfo result ", key, value)
+		response.SetKeyValue(key, value)
+	}
+	return response, err
+}
+
 // urlencode
 func HttpBuildQuery(params map[string]string) string {
 	qs := url.Values{}

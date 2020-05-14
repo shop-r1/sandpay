@@ -161,32 +161,7 @@ func PayPostRedirect(requrl string, request map[string]string) (response respons
 	}
 	defer resp.Body.Close()
 	data, err := ioutil.ReadAll(resp.Body)
-	fmt.Println(string(data))
-	dataString, _ := url.QueryUnescape(string(data[:]))
-
-	if err != nil {
-		return response, err
-	}
-	var fields []string
-	fields = strings.Split(dataString, "&")
-
-	vals := url.Values{}
-	for _, field := range fields {
-		f := strings.SplitN(field, "=", 2)
-		if len(f) >= 2 {
-			key, val := f[0], f[1]
-			vals.Set(key, val)
-		}
-	}
-	result, err := PublicSha1Verify(vals)
-	if err != nil {
-		return response, err
-	}
-	mapInfo := result.(map[string]string)
-	for key, value := range mapInfo {
-		//log.Println("mapinfo result ", key, value)
-		response.SetKeyValue(key, value)
-	}
+	response.Data = string(data)
 	return response, err
 }
 

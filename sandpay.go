@@ -117,12 +117,11 @@ func (sandPay *SandPay) OrderPayH5(params params.OrderPayParams) (resp response.
 	sign, _ := pay.PrivateSha1SignData(signDataJsonString)
 	postData := pay.GeneratePostData(signDataJsonString, sign)
 
-	fmt.Println(postData)
 	data, err := pay.PayPostRedirect(config.ApiHost+"/gw/web/order/create", postData)
 	if err != nil {
 		return
 	}
-	resp.SetData(data.Data)
+	resp.Body.QrCode = data.Data
 	return resp, err
 }
 

@@ -95,7 +95,7 @@ func (sandPay *SandPay) OrderPayH5(params params.OrderPayParams) (resp response.
 	timeString := time.Now().Format("20060102150405")
 
 	header := request.Header{}
-	header.SetMethod(`sandpay.trade.precreate`).SetVersion(`1.0`).SetAccessType("1")
+	header.SetMethod(`sandpay.trade.orderCreate`).SetVersion(`1.0`).SetAccessType("1")
 	header.SetChannelType("07").SetMid(config.MerId).SetProductId("00002000").SetReqTime(timeString)
 	body := request.OrderPayBody{
 		PayTool:     "0401",

@@ -149,19 +149,8 @@ func PayPost(requrl string, request map[string]string) (response response.Respon
 }
 
 // 发送post请求
-func PayPostRedirect(requrl string, request map[string]string) (response response.Response, err error) {
-	http := TimeoutClient()
-	resp, err := http.Post(requrl, "application/x-www-form-urlencoded", strings.NewReader(HttpBuildQuery(request)))
-
-	if err != nil {
-		return response, err
-	}
-	if resp.StatusCode != 200 {
-		return response, fmt.Errorf("http request response StatusCode:%v", resp.StatusCode)
-	}
-	defer resp.Body.Close()
-	data, err := ioutil.ReadAll(resp.Body)
-	response.Data = string(data)
+func PayPostRedirect(requrl string, data, sign string) (response response.Response, err error) {
+	response.Data = fmt.Sprintf("%s?charset=utf-8&data=%s&sign=%s", requrl, data, sign)
 	return response, err
 }
 

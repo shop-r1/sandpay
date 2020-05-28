@@ -10,7 +10,7 @@ type OrderPayBody struct {
 	//4. 订单描述
 	Body string `json:"body"`
 	//5. 订单超时时间
-	TxnTimeOut string `json:"txnTimeOut"`
+	TxnTimeOut string `json:"txnTimeOut,omitempty"`
 	//支付模式
 	PayMode string `json:"payMode,omitempty"`
 	//支付方式列表
@@ -34,7 +34,7 @@ type OrderPayBody struct {
 	//14. 清算模式
 	ClearCycle string `json:"clearCycle,omitempty"`
 	//	分账信息
-	RoyaltyInfo string `json:"royaltyInfo"`
+	RoyaltyInfo string `json:"royaltyInfo,omitempty"`
 	//	16. 风控信息域
 	RiskRateInfo string `json:"riskRateInfo"`
 	//	17. 业务扩展参数

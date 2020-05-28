@@ -32,7 +32,7 @@ type OrderPayBody struct {
 	//13. 操作员编号
 	OperatorId string `json:"operatorId"`
 	//14. 清算模式
-	ClearCycle int `json:"clearCycle"`
+	ClearCycle string `json:"clearCycle,omitempty"`
 	//	分账信息
 	RoyaltyInfo string `json:"royaltyInfo"`
 	//	16. 风控信息域

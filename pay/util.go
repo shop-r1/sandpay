@@ -156,7 +156,7 @@ func PayPostRedirect(requrl string, data, sign string) (response response.Respon
 	//v.Set("data", data)
 	//v.Set("sign", sign)
 	//v.Set("signType", "01")
-	response.Data = fmt.Sprintf("%s?charset=utf-8&data=%s&sign=%s&signType=01", requrl, data, sign)
+	response.Data = fmt.Sprintf("%s?charset=utf-8&data=%s&sign=%s&signType=01", requrl, data, url.QueryEscape(sign))
 	//response.Data = u.String()
 	return response, err
 }

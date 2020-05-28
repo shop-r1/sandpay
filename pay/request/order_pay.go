@@ -14,8 +14,8 @@ type OrderPayBody struct {
 	//支付模式
 	PayMode string `json:"payMode,omitempty"`
 	//支付方式列表
-	PayModeList []string `json:"pay_mode_list,omitempty"`
-	UserId      string   `json:"userId,omitempty"`
+	PayModeList string `json:"payModeList,omitempty"`
+	UserId      string `json:"userId,omitempty"`
 	//	7. 支付扩展域  ANS0.1024 C 具体格式根据 payMode 确定,
 	//PayExtra PayExtra `json:"payExtra"`
 	PayExtra string `json:"payExtra,omitempty"`

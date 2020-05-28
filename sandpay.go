@@ -94,10 +94,10 @@ func (sandPay *SandPay) OrderPayWechat(params params.OrderPayParams) (resp respo
 	timeString := time.Now().Format("20060102150405")
 
 	header := request.Header{}
-	header.SetMethod(`sandpay.trade.precreate`).SetVersion(`1.0`).SetAccessType("1")
+	header.SetMethod(`sandpay.trade.pay`).SetVersion(`1.0`).SetAccessType("1")
 	header.SetChannelType("07").SetMid(config.MerId).SetProductId("00002020").SetReqTime(timeString)
 	body := request.OrderPayBody{
-		PayTool:     "0401",
+		//PayTool:     "0401",
 		OrderCode:   params.OrderNo,
 		TotalAmount: params.GetTotalAmountToString(),
 		Subject:     params.Subject,

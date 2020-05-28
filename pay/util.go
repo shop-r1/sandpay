@@ -150,7 +150,7 @@ func PayPost(requrl string, request map[string]string) (response response.Respon
 
 // 发送post请求
 func PayPostRedirect(requrl string, data, sign string) (response response.Response, err error) {
-	response.Data = fmt.Sprintf("%s?charset=utf-8&data=%s&sign=%ssignType=01", requrl, url.QueryEscape(data), url.QueryEscape(sign))
+	response.Data = fmt.Sprintf("%s?charset=utf-8&data=%s&sign=%s&signType=01", requrl, url.QueryEscape(data), url.QueryEscape(sign))
 	return response, err
 }
 
